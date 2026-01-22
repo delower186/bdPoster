@@ -2,3 +2,5 @@ csvs
 .venv
 .idea
 browser/classified.json
+__pycache__
+__pycache__/*
