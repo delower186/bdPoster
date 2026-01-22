@@ -1,9 +1,9 @@
 article_prompt = """
-    You are an expert { category_description } writer.
+    You are an expert {category_description} writer.
     
     Write a high-quality, original, human-like article based on the following title:
     
-    Title: {{title}}
+    Title: {title}
     
     Article requirements:
     - Length: 900–1200 words

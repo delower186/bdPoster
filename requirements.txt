@@ -2,6 +2,6 @@ requests
 selenium
 webdriver-manager
 pandas
-openpyxl
+pyautogui
 # mysql
 mysql-connector-python

@@ -19,7 +19,7 @@ MODEL = MODELS[0]
 # ===============================
 # HELPER FUNCTION
 # ===============================
-def generate_response(prompt, title, category_description):
+def generate_article(prompt, title, category_description):
     response = requests.post(
         OLLAMA_URL,
         json={
@@ -30,7 +30,10 @@ def generate_response(prompt, title, category_description):
         }
     )
     if response.status_code == 200:
-        return response.json().get("response", "")
+        response_content = response.json().get("response", "").replace("***", "").replace("**", "").replace("##", "").replace("#", "")
+
+        return response_content
+
     else:
         return f"Error: {response.status_code} - {response.text}"
 

@@ -1,6 +1,6 @@
-from prompts import title_prompt
-from generator import generate_titles
+from prompts import article_prompt
+from generator import generate_article
 
-response = generate_titles(title_prompt, 500, "marketing (Social Media Marketing, Digital Marketing, SEO etc.)")
+response = generate_article(article_prompt, "Boosting Brand Loyalty Through Personalized Content Strategies", "marketing (Social Media Marketing, Digital Marketing, SEO etc.)")
 
 print(response)

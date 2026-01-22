@@ -18,8 +18,8 @@ column_name_on_the_csv_file = "title"
 
 # To generate from AI model
 category_descriptions = [
-    "marketing (Social Media Marketing, Digital Marketing, SEO etc.)",
-    "development (Web or Android or Desktop Application)"
+    {"marketing":"marketing (Social Media Marketing, Digital Marketing, SEO etc.)"},
+    {"development":"development (Web or Android or Desktop Application)"}
 ]
 number_of_titles = 1000
 category_description = category_descriptions[1]
@@ -124,6 +124,3 @@ def generate_titles_to_csv():
 
     else:
         import_from_file()
-
-
-generate_titles_to_csv()
