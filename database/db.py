@@ -1,5 +1,5 @@
 import mysql.connector
-from db.db_util import format_keys, format_place_holders, format_values
+from database.db_util import format_keys, format_place_holders, format_values
 # ------------------------------
 # MySQL connection
 # ------------------------------
@@ -75,12 +75,12 @@ def custom_update(table, custom_sql):
 # ------------------------------
 # Select rows
 # ------------------------------
-def select(table, query, condition=None, limit=None, value=None):
+def select(table, query, condition=None, value=None, limit=''):
     try:
         conn = get_db_connection()
         cur = conn.cursor(dictionary=True)
 
-        sql = f"SELECT {query} FROM {table} {condition if condition else ''} LIMIT {limit}"
+        sql = f"SELECT {query} FROM {table} {condition if condition else ''} {limit}"
 
         # 🔎 STRICT DEBUGGING (ADD HERE)
         if condition and "%s" in condition and value is None:

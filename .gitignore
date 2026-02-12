@@ -1,6 +1,6 @@
 csvs
 .venv
 .idea
-browser/classified.json
+browser/users.json
 __pycache__
 __pycache__/*

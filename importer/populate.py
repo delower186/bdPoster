@@ -3,15 +3,20 @@ import datetime
 
 import pandas as pd
 from pathlib import Path
-from db.db import get_db_connection
+from database.db import get_db_connection
+from database.model import get_unposted_title_number
 from prompts import title_prompt
 from generator import generate_titles
 
+
+def get_file_path(file):
+    # ---- CSV PATH ----
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    file_path = BASE_DIR / "csvs" / file
+    return file_path
+
 # To import from file
-csv_file = "titles.csv"
-# ---- CSV PATH ----
-BASE_DIR = Path(__file__).resolve().parent.parent
-csv_path = BASE_DIR / "csvs" / csv_file
+csv_path = get_file_path("titles.csv")
 
 # csv column title
 column_name_on_the_csv_file = "title"
@@ -19,24 +24,32 @@ column_name_on_the_csv_file = "title"
 # To generate from AI model
 category_descriptions = [
     {"marketing":"marketing (Social Media Marketing, Digital Marketing, SEO etc.)"},
-    {"development":"development (Web or Android or Desktop Application)"}
+    {"development":"development (Web or Android or Desktop Application)"},
+    {"design":"design (Graphics, Web etc)"},
+    {"marketplace":"marketplaces (Upwork, Fiverr, Freelancer etc)"},
+    {"philosophy of life":"philosophy of life (Inspirational stories, biographies of famous people, positive behaviors, etc.)"},
+    {"known-unknown":"Known-unknown (Detailed information on general knowledge)"}
 ]
 number_of_titles = 1000
-category_description = category_descriptions[1]
+
 
 # For database
 forums = [
     "marketing",
-    "development"
+    "development",
+    "design",
+    "marketplace",
+    "philosophy of life",
+    "Known-unknown"
 ]
 xpaths = [
     "//a[normalize-space()='Marketing']",
-    "//a[normalize-space()='Development']"
+    "//a[normalize-space()='Development']",
+    "//a[normalize-space()='Design']",
+    "//a[normalize-space()='Marketplace']",
+    "//a[normalize-space()='Philosophy of life']",
+    "//a[normalize-space()='Known-unknown']"
 ]
-forum_name    = forums[1]
-forum_xpath   = xpaths[1]
-
-
 
 # ---- DB CONNECTION (ONLY ONCE) ----
 conn = get_db_connection()
@@ -57,7 +70,7 @@ def read_csv_safe(path):
             return pd.read_csv(path, encoding="latin-1")
 
 
-def import_from_file():
+def import_from_file(forum_name, forum_xpath):
 
     # ---- READ CSV ----
     df = read_csv_safe(csv_path)
@@ -92,7 +105,7 @@ def import_from_file():
     cursor.close()
     conn.close()
 
-def generate_titles_to_csv():
+def generate_titles_to_csv(forum_name, forum_xpath, category_description):
 
     all_titles = set()
     BATCH_SIZE_FOR_7B_MODEL = 25  # sweet spot for 7B models
@@ -123,4 +136,18 @@ def generate_titles_to_csv():
                 writer.writerow([title.strip()])  # Single column only
 
     else:
-        import_from_file()
+        import_from_file(forum_name, forum_xpath)
+
+
+def get_titles(forum):
+
+    # print(f"Getting titles for {forum} and index {forums.index(forum)}")
+
+    category_description = category_descriptions[forums.index(forum)]
+
+    forum_name = forums[forums.index(forum)]
+    forum_xpath = xpaths[forums.index(forum)]
+
+    generate_titles_to_csv(forum_name, forum_xpath, category_description)
+
+# print(get_unposted_title_number("marketing"))

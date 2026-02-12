@@ -1,4 +1,7 @@
 import requests
+
+from browser.utilities import remove_non_bmp
+
 # ===============================
 # CONFIGURATION
 # ===============================
@@ -31,8 +34,9 @@ def generate_article(prompt, title, category_description):
     )
     if response.status_code == 200:
         response_content = response.json().get("response", "").replace("***", "").replace("**", "").replace("##", "").replace("#", "")
+        cleaned_content = remove_non_bmp(response_content)
 
-        return response_content
+        return cleaned_content
 
     else:
         return f"Error: {response.status_code} - {response.text}"

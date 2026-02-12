@@ -5,59 +5,56 @@ article_prompt = """
     
     Title: {title}
     
-    Article requirements:
-    - Length: 900–1200 words
-    - Write in clear, professional English
-    - Suitable for beginners to intermediate developers
-    - Avoid fluff, repetition, and generic explanations
+    Article Requirements:
+    - Length: 700–900 words
+    - Clear, professional English
+    - Suitable for beginners to intermediate readers
+    - Concise but insightful
+    - Avoid fluff, repetition, and generic filler
     - Do NOT mention AI, prompts, or instructions
     
-    Structure:
-    1. Introduction
-       - Briefly explain what the topic is
-       - Explain why it is important
+    phpBB Formatting Rules (STRICT):
+    - Use ONLY these BBCode tags: [b] and [code]
+    - Use [b] ONLY for section titles
+    - Use 3–5 sections maximum
+    - Each [b] section title must be on its own line
+    - Leave exactly one blank line before and after each [b] section
+    - Leave one blank line before and after each [code] block
+    - Do NOT nest BBCode tags
+    - Do NOT place [b] inside [code]
+    - Do NOT place [code] inside [b]
+    - Do NOT use Markdown
+    - Do NOT use bullet points
+    - Do NOT use numbered lists
+    - Do NOT use emojis
+    - Do NOT use excessive capitalization
+    - Do NOT add decorative separators
     
-    2. Main Content
-       - Use clear section titles written as plain text
-       - Explain concepts step by step
-       - Include practical examples and best practices
-       - For Web Development topics:
-         - Explain HTML, CSS, JavaScript, backend, or performance concepts where relevant
-       - For Android Development topics:
-         - Explain Kotlin or Java concepts where relevant
-         - Discuss Android components, architecture, and performance
+    Content Guidelines:
+    - Start with a strong opening section explaining why the topic matters in {category_description}
+    - Explain core concepts clearly and efficiently
+    - Include practical applications and best practices
+    - If relevant, include 1–2 short [code] examples only
+    - Briefly discuss common mistakes and how to avoid them
+    - End with a concise, practical conclusion section
     
-    3. Examples
-       - Include code examples written as plain text
-       - Keep code simple and readable
+    SEO Guidelines:
+    - Naturally include keywords related to the title and {category_description}
+    - Use semantic variations
+    - Avoid keyword stuffing
+    - Maintain natural human tone
     
-    4. Common Mistakes or Pitfalls
-       - List common errors developers make
-       - Explain how to avoid them
+    Anti-Spam Optimization:
+    - Avoid repetitive sentence patterns
+    - Avoid overly promotional tone
+    - Avoid exaggerated claims
+    - Keep paragraph lengths varied
+    - Maintain natural language flow
     
-    5. FAQ Section
-       - Include 3–5 common questions with clear answers
-    
-    6. Conclusion
-       - Summarize key points
-       - Give practical takeaways
-       
-    Use BBCode tags only:
-    [b] for section titles
-    [code] for code examples
-    [list] and [*] for lists
-    Do not use Markdown.
-    
-    SEO guidelines:
-    - Naturally include keywords related to the title
-    - Write for humans first, search engines second
-    - Do not keyword stuff
-    
-    Output rules:
-    - Plain text only
-    - No Markdown
-    - No special formatting
-    - No emojis
+    Output Rules:
+    - Return ONLY the formatted article
+    - No commentary before or after
+    - No extra text outside the article
 """
 
 title_prompt = """

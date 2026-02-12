@@ -11,6 +11,10 @@ from browser.selectors import profile_drop_down, logout_btn, username_field, pas
 def wait(sec):
     time.sleep(sec)
 
+# remove emoji
+def remove_non_bmp(text):
+    return ''.join(c for c in text if ord(c) <= 0xFFFF)
+
 def scroll_to_element(driver, element_obj):
     # Execute JavaScript to scroll the element into view
     driver.execute_script("arguments[0].scrollIntoView();", element_obj)
@@ -84,16 +88,16 @@ def logout(driver):
         # element does not exist → handle gracefully
         profile = None
 
-def login(driver, config):
+def login(driver, user):
     try:
         driver.find_element(By.XPATH, profile_drop_down)
-        print("Already logged in → skipping login")
+        # print("Already logged in → skipping login")
     except NoSuchElementException:
-        print("Not logged in → performing login")
+        # print("Not logged in → performing login")
         # Username
         username = driver.find_element(By.XPATH, username_field)
         scroll_to_element(driver, username)
-        username.send_keys(config.user['username'])
+        username.send_keys(user['username'])
         # Password
-        driver.find_element(By.XPATH, password_field).send_keys(config.user['password'])
+        driver.find_element(By.XPATH, password_field).send_keys(user['password'])
         driver.find_element(By.XPATH, login_btn).click()
