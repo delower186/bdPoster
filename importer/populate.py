@@ -102,8 +102,8 @@ def import_from_file(forum_name, forum_xpath):
 
     # ---- COMMIT & CLOSE ----
     conn.commit()
-    cursor.close()
-    conn.close()
+    # cursor.close()
+    # conn.close()
 
 def generate_titles_to_csv(forum_name, forum_xpath, category_description):
 

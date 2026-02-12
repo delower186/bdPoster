@@ -53,12 +53,14 @@ def post(total_number_of_articles):
 
         # get random forum from available ones
         forum = get_random_forum()
-
+        print(f"Posting article in forum: {forum}")
         if get_unposted_title_number(forum) < 100:
+           print(f"Title counts of forum {forum} is below 100, getting new titles....")
            get_titles(forum)
 
+
         titles = get_unposted_title_all(forum, 1)
-        print(forum)
+
         for title in titles:
 
             if number_of_article_posted >= total_number_of_articles:
